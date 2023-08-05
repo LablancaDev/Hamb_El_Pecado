@@ -1,0 +1,495 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;  
+  user-select: none;/* IMPORTANTE para que el usuario no seleccione textos*/
+}
+
+/*variables CSS*/
+:root{
+    --fondo:#4386F3;
+    --blanco:#fffaf0;
+    --naranja:#FF680D;
+    --amarillo:#FBFF00;
+    --rojo:	#ff0000;
+    --negro:#111111;
+    --oscuro:#303030;
+    --titulos:'Mystery Quest', cursive;
+    --parrafos: 'Itim', sans-serif;
+}
+
+/*Cambio de font-size a 62.px para trabajar con rem*/
+
+/*En esta web trabajaré con la unidad de medida rem 
+los rems se basan en el valor calculado del navegador por defecto (16px) y lo multiplican por la cantidad de rem que pongamos
+16 x 2= 32 ,16 x 3 = 48  */
+
+/*Vamos a resetear el valor calculado del navegador, por lo tanto ya no medirá 16px ahora medirá 10px, esto lo hacemos para
+que usar medidas sea más fácil usando múltiplos de 10, para que cuando pongamos 1 rem sean 10px, si pongo 2 rem sean 20 px
+los rem es la mejor unidad de medida para realizar una web responsive*/
+
+/* Porque el tamaño de fuente predeterminado de HTML es 16px y el 62.5% de 16px es 10px. Es para que no tengamos problemas haciendo cálculos.
+Así nos permite trabajar con rem como si fueran pixeles.  */
+
+html{
+    font-size: 62.5%;/*reseteamos el valor calculado del navegador*/
+    /* 1REM = 10PX */
+}
+body{
+    font-size: 1.6rem;/*en el body le decimos que por defecto otra vez tenga 16 px por eso le damos 1.6 rem 
+    pero mi valor calculado en el navegador es de 10px (valor para trabajar en la página)*/
+}
+
+
+
+/*A PARTIR DE AQUÍ TENDREMOS TODO LO BÁSICO PARA EMPEZAR A MAQUETAR LA WEB*/
+
+/* ESTILOS GENERALES */
+
+/*Asignamos variables a los h y parrafos*/
+h1,h2,h3{
+    font-family: var(--titulos);
+    
+}
+p,a{
+    font-family: var(--parrafos);
+}
+/*MUY IMPORTANTE PARA NO GENERAR UN DESCUADRE AL PASAR DE MOVIL A TABLET/PC QUITAR Y PROBAR*/
+img{/*Estilo general para todas las imagenes, cuando se añaden son muy grandes, con esto le estamos diciendo que ocupen el 100%disponible de su contenedor padre para ajustarlas mejor*/
+    max-width: 100%;/*queda un borde en cada lateral que es el que le hemos dado en la clase . contenedor justo arriba que era para poder hacer scrool desde un movil*/
+}
+
+.ocultar{
+    display: none;/*oculto menu navegador*/
+}
+
+
+/* animación para el menu del navegador */
+@keyframes desplazaMenu {
+    0%{
+        transform: translateX(100%);
+    }
+    100%{
+        transform: translateX(0);
+    }
+}
+
+/*version movil para el boton*/
+.boton{/*estilos enlace a boton menu pecado*/
+    text-decoration: none; 
+    color: var(--blanco);
+    font-size: 1.8rem;
+    text-transform: capitalize;/*la primera letra de cada palabra sea mayusculas*/
+    padding: 1rem 2rem; /*1rem->arriba y abajo, 3rem->izq y dercha*/
+    margin-top: 3rem;
+    border-radius: 5px;
+    transition: all .3s ease-in-out; /*transicion al boton cuando se pasa el cursor*/
+ }
+ /*estilos pc tamaño boton menu pecado*/
+ @media(min-width:768px) {
+     .boton{
+        font-size: 3rem;
+     }
+ 
+ }
+ /*estilo bordes boton menu pecado movil */
+.borde{/*borde al enlace*/
+    border: 3px solid var(--blanco);
+}
+ /*estilo bordes boton menu pecado tablet pc */
+@media(min-width:768px) {
+    .borde{
+        border: 5px solid var(--blanco);
+    }
+
+}
+.borde:hover{
+    color: var(--rojo);
+    background-color: var(--blanco);
+}
+
+.botCerrar{/*estilo al boton X cerra es un parrafo no un logo ni imagen, se puede hacer con una imagen tb*/
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--blanco);
+    position: absolute;
+    top: 2rem;
+    right: 50px;
+    user-select: none;/*para que cuando pulsemos la x no se quede seleccionado*/
+}
+.botCerrar:hover{
+    cursor: pointer;
+}
+
+/*sombreado de pantalla completa excepto menu cuando pulsamos al nav*/
+.pantalla-completa{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,.5);
+    z-index: 4;/*IMPORTANTE el z-index es como se van a sobreponer los elementos, el que tenga el numero mayor se va a sobreponer sobre el de menor numero */
+}
+
+
+/* SECCION HEADER */
+
+.contenedor-navegador{
+    background-color: var(--oscuro);
+    position: relative;
+    z-index: 5;/*MUY IMPORTANTE ESTE Z-INDEX HACE QUE CUANDO SE ABRA EL MENÚ NAV SE SOBREPONGA SOBRE EL SOMBREADO DE PANTALLA */
+}
+/*estilo para movil y al titulo principal*/
+.titulo img{
+    height: 4rem;
+}
+/*estilo para tablet y pc al titulo principal*/
+@media(min-width:768px) {
+    .titulo img{
+        height: 8rem;
+    }
+
+}
+
+.contenido-navegador{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+/* estilos del nav */
+
+.navegador{
+    position: absolute;
+    right: 0;
+    top: 0;
+    /* background-color: #303030; */
+    background-image:url(/assets/imgs/fondoMenu3.jpg);
+    height: 100vh;
+    width: 40rem;
+    padding: 6rem 2rem;
+    animation: desplazaMenu .4s ease-in-out;/*animacion creada arriba en estilos generales*/
+}
+
+.navegador a{
+    text-decoration: none;
+    font-size: 2.5rem;/*20px*/
+    padding: 3.5rem;/*35px*/
+    text-align: center;
+    color: var(--naranja);
+    display: block;
+    transition: color .3s ease-in-out;
+}
+@media(min-width:768px) {/*PENDIENTE HACER QUE EN VERSION PC ELIMINAR MENU HAMBURGUESA Y SE MUESTRE NAV EN EL HEADER*/
+    .navegador {
+        /* display: none; */
+    }
+    .navegador a{
+        /* display: none; */
+    }
+    .ocultar{
+        
+    }
+    .hamburguesa img{
+        /* display: none; */
+    }
+
+}
+
+/*hover menu nav*/
+.navegador a:nth-child(even):hover{
+    color: var(--amarillo);
+}
+.navegador a:nth-child(odd):hover{
+    color: var(--rojo);
+}
+
+
+/* Creación del botón menú nav */
+/* .hamburguesa span{  //al quitar el menu de tres rallas por la img de la hambur no hacen falta estos estilos de posicion de las tres rallas
+    background-color: var(--blanco);
+    display: block;
+    width: 5rem;
+    height: .6rem;
+    margin-bottom: .7rem;
+    margin-right: 2rem;
+} */
+.hamburguesa:hover{/*mano cuando pasamos cursor por menu*/
+    cursor: pointer;
+}
+/* MOVIL */
+.hamburguesa img{/*posición img hamburguesa*/
+    width: 6rem;
+    height: 4rem;
+    margin-right: 2rem;
+}
+/* PC */
+@media(min-width:768px) {
+    .hamburguesa img{
+    width: 9rem;
+    height: 7rem;
+    margin-right: 3rem;
+    }
+
+}
+
+
+/* ARREGLAR CUANDO SE ABRE EL MENU EL VIDEO TAPA EL MENU DEL NAV Y NO SE PUEDE PULSAR */
+
+/* VIDEO */
+
+/*elemento padre*/
+.contenido-header{/*vamos a sombrear el video*/
+    position: relative;/*ponemos un position:relative ya que vamos a poner un pseudoelemento*/
+    /*recuerda padre-> position: relative, hijo->position: absolute*/
+}
+/*elemento hijo*/
+.contenido-header::before{/*oscurecer video en todo el espacio disponible*/
+    content: '';
+    position: absolute;
+    /*al tener un position:absolute tenemos acceso al top, left, bottom etc...*/
+    top: 0;
+    left: 0;/*estos 4 elementos harán que se ocupe todo el espacio disponible*/
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,.5);/*oscurecer fondo video*/
+
+}
+video{
+    width: 100%;/*para ver la imágen del video a pantalla completa*/
+    height: 100%;
+}
+
+
+.texto-encabezado{
+    position: absolute;/*posicionamos texto encima de la imagen/video oscurecida*/
+    z-index: 2;/*volvemos a posicionarlo encima del todo*/
+    width: 100%;/*le decimos que ocupe todo el ancho disponible*/
+    height: 75%;/*le decimos que ocupe el % de alto disponible que queramos*/
+    display: flex;/*y posicionamos el texto y el enlace uno al lado del otro*/
+    flex-direction: column;/*como queremos que los elementos se posicionen uno abajo del otro tenemos que cambiar la direccion de los elementos esto lo haremos con flex-direction*/
+    align-items: center;/*alineamos al centro titulo y enlace juntos*/
+    justify-content: center;/*alinemos en top y bottom al centro*/
+}
+/* MOVIL */
+.texto-encabezado h2{
+    color: var(--blanco);
+    font-size: 3rem;
+}
+/* PC */
+@media(min-width:768px) {
+    .texto-encabezado h2{
+        color: var(--blanco);
+        font-size: 5rem;
+    }
+
+}
+
+/*SECCION SOBRE NOSOTROS*/
+
+.contenedor-nosotros{/*Lo primero es hacer un display-flex al contenedor padre para poner su contenido hijos:texto y fotos en horizontal */
+    /* display: flex; *//*activar para poner texto e imagenes en horizontal*/
+    justify-content: space-between;
+    background-color: var(--oscuro);
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+.contenido-nosotros{
+    font-size: 2rem;
+    color: var(--blanco);
+    text-align: center;
+} 
+.contenido-nosotros h1{
+    font-size: 3rem;
+    padding: 2rem;
+}
+@media(min-width:768px) {
+    .contenido-nosotros h1{
+        font-size: 5rem;
+    }
+
+}
+.contenido-nosotros h2{
+    color:var(--blanco);
+    padding-bottom: 2rem;
+}
+.contenido-nosotros h2:hover{
+    color: var(--rojo);
+    cursor: pointer;
+}
+.contenido-nosotros p{
+    padding-bottom: 3rem;
+    /* margin-left: 3rem;/*lo anulo por que ya le he puesto en contenedor nosotros un padding left y right*/
+    /* margin-right: 3rem; */
+}
+@media(min-width:768px) {
+    .contenido-nosotros p{
+        font-size: 3rem;
+    }
+
+}
+
+@media(min-width:768px) {
+    .imagenes-nosotros{
+        display: flex;
+    }
+
+}
+.imagen1y2 img, .imagen3y4 img{
+    height: 25rem;
+    width: 40rem;
+    padding: 1rem;
+    border-radius: 5rem;
+} 
+@media(min-width:768px) {
+    .imagen1y2 img, .imagen3y4 img{
+        height: 35rem;
+        width: 55rem;
+        padding: 1rem;
+        border-radius: 5rem;
+    }
+
+}
+.imagenes-nosotros{
+    text-align: center;
+    justify-content: space-between;
+}
+
+.imagenes-nosotros img:hover {
+    }
+
+/* SECCION NUESTROS MENUS */
+.contenedor-menus{
+    background-color:var(--negro)
+}
+.texto-menus h2{
+    text-align: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+.imagenes-menus{
+    display: flex;
+    text-align: center;
+}
+/*MUY IMPORTANTE Las medidas de las imagenes las he colocado en el html en cada enlace de imagen para que todas las imagenes sean del mismo tamaño*/
+.imagenes-menus img{
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.imagenes-menus{
+     justify-content: space-between; /*elimino esta propiedad ya que cuando cambio el tamaño de pantalla las imagenes se descuadran, para solucionarlo arriba les doy a las imagenes un padding*/
+}
+
+.texto-menus h2{
+    color: var(--blanco);
+    font-size: 3rem;
+}
+@media(min-width:768px) {
+    .texto-menus h2{
+        font-size: 4rem;
+    }
+}
+.img-menu h3{
+    color: var(--rojo);
+}
+.img-menu p{
+    font-size: 0rem;/*desaparece el texto de las imagenes al reducir a version movil*/
+}
+@media(min-width:768px) {
+    .img-menu p{
+        font-size: 1.5rem;
+        color: var(--blanco);
+    }
+}
+.img-menu img{
+    height: 14rem;
+    width: 19rem;
+    border-radius: 12px;
+    
+    
+}
+@media(min-width:768px) { 
+.img-menu img{
+    height: 20rem;
+    width: 36rem;
+   
+}
+}
+.img-menu p{
+    padding: 1rem 2rem 3rem 3rem;
+}
+
+/* SECCION PEDIDOS ONLINE */
+
+.contenedor-PedidiosOnline{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2)), url(/assets/imgs/imagenPedidosOnline.jpg);
+    height: 100vh;/*para que la imagen ocupe el espacio maximo del navegador*/
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.contenedor-PedidiosOnline h2,h3,p{
+    color: var(--blanco);
+    /* text-align: center; No hace falta darle el centrado por que ya centro todo el conjunto abajo en texto-Pedidos-Online*/
+}
+.contenedor-PedidiosOnline h2{
+    padding-top: 6rem;
+    padding-bottom: 3rem;
+    font-size: 4rem;
+}
+.contenedor-PedidiosOnline h3{
+    padding-bottom: 1rem;
+    font-size: 3rem;
+}
+.contenedor-PedidiosOnline p{
+    margin-left: 10rem;
+    margin-right: 10rem;
+}
+.texto-Pedidos-Online{/*CENTRADO DE TITULOS PARRAFO Y BOTON REPASAR*/
+    align-items: center;
+    display: flex;/*y posicionamos el texto y el enlace uno al lado del otro*/
+    flex-direction: column;/*como queremos que los elementos se posicionen uno abajo del otro tenemos que cambiar la direccion de los elementos esto lo haremos con flex-direction*/  
+}
+.texto-Pedidos-Online .botOnline{
+    margin-top: 4rem;
+    color: var(--blanco);
+    text-decoration: none;
+    font-size: 2.2rem;
+    border-radius: 5px;
+    transition: all .3s ease-in-out;
+    padding: 0.5rem;
+}
+.bord{
+    border: 3px solid var(--blanco);
+}
+.bord:hover{
+    color: var(--negro);
+    background-color: var(--blanco);
+}
+
+.footer{
+    background-color: var(--oscuro);
+    height: 4rem;
+}
+
+.footer p{
+    text-align: center;
+    line-height: 4rem;
+    color:#FF680D
+}
+.footer a{
+    color: #4386F3;
+}
+.footer a:hover{
+    color:darkcyan;
+}
+
+
+
+
+
+
+
