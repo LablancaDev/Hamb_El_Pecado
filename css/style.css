@@ -136,6 +136,7 @@ img{/*Estilo general para todas las imagenes, cuando se añaden son muy grandes,
 /* SECCION HEADER */
 
 .contenedor-navegador{
+    height: 5em;
     background-color: var(--oscuro);
     position: relative;
     z-index: 5;/*MUY IMPORTANTE ESTE Z-INDEX HACE QUE CUANDO SE ABRA EL MENÚ NAV SE SOBREPONGA SOBRE EL SOMBREADO DE PANTALLA */
@@ -184,16 +185,26 @@ img{/*Estilo general para todas las imagenes, cuando se añaden son muy grandes,
 }
 @media(min-width:768px) {/*PENDIENTE HACER QUE EN VERSION PC ELIMINAR MENU HAMBURGUESA Y SE MUESTRE NAV EN EL HEADER*/
     .navegador {
-        /* display: none; */
+        position: relative;
+        display: flex;
+        background-image: none;
+       
     }
     .navegador a{
-        /* display: none; */
+       position: absolute;
+        top: 0;
+        
+        
+        
+    }
+    .titulo img{
+      display: none;
     }
     .ocultar{
         
     }
     .hamburguesa img{
-        /* display: none; */
+        display: none;
     }
 
 }
